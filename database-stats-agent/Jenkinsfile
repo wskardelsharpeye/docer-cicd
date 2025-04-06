@@ -34,9 +34,10 @@ pipeline {
                     docker run -d \
                         --rm \
                         --name app-container \
+                        --network host \  # 添加这行使用主机网络
                         -p 8081:8081 \
                         -v ${WORKSPACE}/logs:/app/logs \
-                        -e SPRING_DATA_MONGODB_URI=mongodb://host.docker.internal:27017 \
+                        -e SPRING_DATA_MONGODB_URI=mongodb://localhost:27017 \
                         app-image:${BUILD_NUMBER}
                 '''
             }
