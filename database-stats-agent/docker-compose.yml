@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  app1:
+    container_name: 20250404_04_container
+    build: .
+    image: 20250404_04_image
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATA_MONGODB_HOST=host.docker.internal
+    volumes:
+      - ./logs:/app/logs
+    # restart: always 确保容器在任何情况下停止运行时（如应用程序崩溃、Docker守护进程重启等）都会自动重启
+    # 这样可以保证服务的持续可用性
+    restart: always
