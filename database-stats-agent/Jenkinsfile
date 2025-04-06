@@ -26,17 +26,15 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                // 使用Docker Pipeline插件部署容器
-                script {
-                    // 停止并删除旧容器（如果存在）
-                    sh 'docker stop app-container || true'
-                    sh 'docker rm app-container || true'
-                    
-                    // 运行新容器
-                    docker.image("app-image:${BUILD_NUMBER}").run(
-                        "--name app-container -p 8081:8081 -v ${WORKSPACE}/logs:/app/logs"
-                    )
-                }
+                sh '''
+                    docker stop app-container || true
+                    docker rm app-container || true
+                    docker run -d \
+                        --name app-container \
+                        -p 8081:8081 \
+                        -v ${WORKSPACE}/logs:/app/logs \
+                        app-image:${BUILD_NUMBER}
+                '''
             }
         }
     }
