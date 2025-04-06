@@ -20,7 +20,9 @@ pipeline {
         
         stage('Docker Build') {
             steps {
-                sh 'docker build -t app-image:${BUILD_NUMBER} .'
+                dir('database-stats-agent') {
+                    sh 'docker build -t app-image:${BUILD_NUMBER} .'
+                }
             }
         }
         
