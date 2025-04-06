@@ -36,6 +36,8 @@ pipeline {
                         --name app-container \
                         -p 8081:8081 \
                         -v ${WORKSPACE}/logs:/app/logs \
+                        -e SPRING_DATA_MONGODB_HOST=host.docker.internal \
+                        -e SPRING_DATA_MONGODB_PORT=27017 \
                         app-image:${BUILD_NUMBER}
                 '''
             }
