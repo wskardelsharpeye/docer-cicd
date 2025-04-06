@@ -1,5 +1,5 @@
-# 使用 OpenJDK 23 精简版作为基础镜像，减小镜像体积
-FROM openjdk:23-slim
+# 使用 OpenJDK 17 精简版作为基础镜像，减小镜像体积
+FROM openjdk:17-slim
 
 # 安装基础工具包，包含 ps、top 等进程管理工具
 # apt-get update 更新包索引
